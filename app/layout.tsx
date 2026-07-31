@@ -1,13 +1,6 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "@/app/globals.css";
 import Navbar from "@/components/Navbar";
-
-const inter = Inter({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-inter",
-});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://zeropointbyx.com"),
@@ -49,7 +42,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="bn" className={inter.variable}>
+    <html lang="bn">
       <body className="min-h-screen font-sans antialiased">
         <script
           dangerouslySetInnerHTML={{
