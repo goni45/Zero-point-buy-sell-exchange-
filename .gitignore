@@ -28,3 +28,5 @@ schema.json
 
 # migration script (contains local tooling only)
 /scripts/
+.vercel
+.env*
