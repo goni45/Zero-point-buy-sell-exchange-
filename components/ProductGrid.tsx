@@ -9,14 +9,18 @@ import CategoryFilter, {
 } from "@/components/CategoryFilter";
 import ProductCard from "@/components/ProductCard";
 
-export default function ProductGrid({ products }: { products: Product[] }) {
+export default function ProductGrid({
+  initialProducts,
+}: {
+  initialProducts: Product[];
+}) {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState<CategoryFilterValue>("All");
   const [condition, setCondition] = useState<"All" | Product["condition"]>("All");
 
   const filtered = useMemo(() => {
     const query = search.trim().toLowerCase();
-    return products.filter((p) => {
+    return initialProducts.filter((p) => {
       const matchQuery =
         !query ||
         p.title.toLowerCase().includes(query) ||
@@ -25,7 +29,7 @@ export default function ProductGrid({ products }: { products: Product[] }) {
       const matchCondition = condition === "All" || p.condition === condition;
       return matchQuery && matchCategory && matchCondition;
     });
-  }, [search, category, condition, products]);
+  }, [search, category, condition]);
 
   return (
     <section id="inventory" className="scroll-mt-28 px-4 py-16 sm:px-6">

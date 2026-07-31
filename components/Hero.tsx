@@ -12,8 +12,17 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import { waLink } from "@/lib/business";
+import type { HeroBanner } from "@/lib/sanity.mapper";
 
-const OFFERS = [
+interface DefaultOffer {
+  icon: typeof BadgePercent;
+  label: string;
+  title: string;
+  sub: string;
+  cta: string;
+}
+
+const DEFAULT_OFFERS: DefaultOffer[] = [
   {
     icon: BadgePercent,
     label: "Special Offer",
@@ -40,18 +49,32 @@ const OFFERS = [
 const HERO_IMAGE =
   "https://images.unsplash.com/photo-1512499617640-c74ae3a79d37?auto=format&fit=crop&w=1400&q=85";
 
-export default function Hero() {
+export default function Hero({ banners = [] }: { banners?: HeroBanner[] }) {
   const [active, setActive] = useState(0);
+
+  const offers: (DefaultOffer & { icon: typeof BadgePercent })[] =
+    banners.length > 0
+      ? banners.map((banner, i) => {
+          const icons = [BadgePercent, RefreshCcw, Gift] as const;
+          return {
+            icon: icons[i % icons.length],
+            label: banner.label,
+            title: banner.title,
+            sub: banner.sub,
+            cta: banner.cta,
+          };
+        })
+      : DEFAULT_OFFERS;
 
   useEffect(() => {
     const id = setInterval(
-      () => setActive((v) => (v + 1) % OFFERS.length),
+      () => setActive((v) => (v + 1) % offers.length),
       5000,
     );
     return () => clearInterval(id);
-  }, []);
+  }, [offers.length]);
 
-  const offer = useMemo(() => OFFERS[active], [active]);
+  const offer = useMemo(() => offers[active], [offers, active]);
   const OfferIcon = offer.icon;
 
   return (
@@ -203,7 +226,7 @@ export default function Hero() {
               <ArrowRight className="h-3.5 w-3.5" />
             </a>
             <div className="flex gap-1.5">
-              {OFFERS.map((o, i) => (
+              {offers.map((o, i) => (
                 <button
                   key={o.label}
                   type="button"

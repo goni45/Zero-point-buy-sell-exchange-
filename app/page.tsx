@@ -4,8 +4,14 @@ import ProductGrid from "@/components/ProductGrid";
 import Offers from "@/components/Offers";
 import Footer from "@/components/Footer";
 import { BUSINESS } from "@/lib/business";
-import { getProducts } from "@/lib/sanity.data";
-import { toFrontendProducts } from "@/lib/sanity.mapper";
+import { products as mockProducts } from "@/lib/products";
+import {
+  mapSanityBanner,
+  mapSanityProduct,
+} from "@/lib/sanity.mapper";
+import { getBanners, getProducts } from "@/lib/sanity.data";
+
+export const revalidate = 60;
 
 export const metadata: Metadata = {
   alternates: {
@@ -89,7 +95,17 @@ const jsonLd = {
 };
 
 export default async function Home() {
-  const products = toFrontendProducts(await getProducts());
+  const [sanityProducts, sanityBanners] = await Promise.all([
+    getProducts().catch(() => []),
+    getBanners().catch(() => []),
+  ]);
+
+  const displayProducts =
+    sanityProducts.length > 0
+      ? sanityProducts.map(mapSanityProduct)
+      : mockProducts;
+
+  const heroBanners = sanityBanners.map(mapSanityBanner);
 
   return (
     <>
@@ -97,8 +113,8 @@ export default async function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <Hero />
-      <ProductGrid products={products} />
+      <Hero banners={heroBanners} />
+      <ProductGrid initialProducts={displayProducts} />
       <Offers />
       <Footer />
     </>
