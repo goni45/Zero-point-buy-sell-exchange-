@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 250 250 252;
+  --foreground: 23 23 28;
+}
+
+html.dark {
+  --background: 13 13 18;
+  --foreground: 240 240 244;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: rgb(var(--foreground));
+  background: rgb(var(--background));
+  -webkit-font-smoothing: antialiased;
+}
+
+@layer utilities {
+  .glass {
+    @apply border border-white/40 bg-white/60 backdrop-blur-xl dark:border-white/10 dark:bg-white/5;
+  }
+
+  .glass-strong {
+    @apply border border-white/50 bg-white/80 backdrop-blur-2xl dark:border-white/10 dark:bg-zinc-900/70;
+  }
+
+  .text-gradient {
+    @apply bg-gradient-to-r from-brand via-brand-soft to-brand bg-clip-text text-transparent;
+  }
+
+  .shadow-glow {
+    @apply shadow-lg shadow-violet-500/10;
+  }
+}
+
+::selection {
+  background: rgb(124 58 237 / 0.25);
+}
