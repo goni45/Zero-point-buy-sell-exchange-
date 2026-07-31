@@ -4,6 +4,8 @@ import ProductGrid from "@/components/ProductGrid";
 import Offers from "@/components/Offers";
 import Footer from "@/components/Footer";
 import { BUSINESS } from "@/lib/business";
+import { getProducts } from "@/lib/sanity.data";
+import { toFrontendProducts } from "@/lib/sanity.mapper";
 
 export const metadata: Metadata = {
   alternates: {
@@ -86,7 +88,9 @@ const jsonLd = {
   ],
 };
 
-export default function Home() {
+export default async function Home() {
+  const products = toFrontendProducts(await getProducts());
+
   return (
     <>
       <script
@@ -94,7 +98,7 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <Hero />
-      <ProductGrid />
+      <ProductGrid products={products} />
       <Offers />
       <Footer />
     </>

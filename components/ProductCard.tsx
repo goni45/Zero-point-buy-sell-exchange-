@@ -47,10 +47,12 @@ export default function ProductCard({
             className={`inline-flex items-center rounded-full px-3 py-1 text-[11px] font-bold text-white shadow-md ${
               product.condition === "New"
                 ? "bg-emerald-500"
-                : "bg-amber-500"
+                : product.condition === "Refurbished"
+                  ? "bg-sky-500"
+                  : "bg-amber-500"
             }`}
           >
-            {product.condition === "New" ? "New" : "Used"}
+            {product.condition === "New" ? "New" : product.condition === "Refurbished" ? "Refurbished" : "Used"}
           </span>
           {product.isFeatured && (
             <span className="inline-flex items-center rounded-full bg-white/90 px-3 py-1 text-[11px] font-bold text-brand shadow-md backdrop-blur">

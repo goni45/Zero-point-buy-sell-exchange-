@@ -3,14 +3,13 @@
 import { useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { PackageSearch } from "lucide-react";
-import { products } from "@/lib/products";
 import type { Product } from "@/lib/types";
 import CategoryFilter, {
   type CategoryFilterValue,
 } from "@/components/CategoryFilter";
 import ProductCard from "@/components/ProductCard";
 
-export default function ProductGrid() {
+export default function ProductGrid({ products }: { products: Product[] }) {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState<CategoryFilterValue>("All");
   const [condition, setCondition] = useState<"All" | Product["condition"]>("All");
@@ -26,7 +25,7 @@ export default function ProductGrid() {
       const matchCondition = condition === "All" || p.condition === condition;
       return matchQuery && matchCategory && matchCondition;
     });
-  }, [search, category, condition]);
+  }, [search, category, condition, products]);
 
   return (
     <section id="inventory" className="scroll-mt-28 px-4 py-16 sm:px-6">

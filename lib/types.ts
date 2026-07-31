@@ -1,4 +1,4 @@
-export type Condition = "New" | "Used";
+export type Condition = "New" | "Used" | "Refurbished";
 
 export type Category = "Phones" | "Accessories" | "Laptops";
 
@@ -16,4 +16,4 @@ export interface Product {
 
 export const categories: Category[] = ["Phones", "Accessories", "Laptops"];
 
-export const conditions: ("All" | Condition)[] = ["All", "New", "Used"];
+export const conditions: ("All" | Condition)[] = ["All", "New", "Used", "Refurbished"];
