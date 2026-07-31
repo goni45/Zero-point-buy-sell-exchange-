@@ -41,7 +41,7 @@ export const metadata: Metadata = {
       "Best Buy, Sell & Exchange deals in Mymensingh. Genuine phones, laptops & accessories.",
   },
   icons: {
-    icon: "/icon.svg",
+    icon: "/icon.png",
   },
 };
 

@@ -11,9 +11,9 @@ import {
   Music2,
   Phone,
   Play,
-  ShoppingBag,
 } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import { BUSINESS, googleMapsEmbed } from "@/lib/business";
 
 const SERVICES_LINKS = [
@@ -38,8 +38,14 @@ export default function Footer() {
           <div className="grid gap-10 p-7 sm:p-10 lg:grid-cols-[1.15fr_1fr_1fr_1.2fr]">
             <div>
               <Link href="#home" className="flex items-center gap-2.5">
-                <span className="grid h-10 w-10 place-items-center rounded-xl bg-gradient-to-br from-brand to-brand-deep text-white shadow-lg shadow-violet-500/30">
-                  <ShoppingBag className="h-5 w-5" />
+                <span className="grid h-10 w-10 place-items-center overflow-hidden rounded-xl shadow-lg shadow-violet-500/20">
+                  <Image
+                    src="/images/logo.png"
+                    alt="Zero Point Buy Sell Exchange logo"
+                    width={40}
+                    height={40}
+                    className="h-10 w-10 object-cover"
+                  />
                 </span>
                 <span className="leading-tight">
                   <span className="block text-base font-bold tracking-tight">

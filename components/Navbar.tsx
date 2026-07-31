@@ -2,8 +2,9 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, Phone, ShoppingBag, X, MessageCircle } from "lucide-react";
+import { Menu, Phone, X, MessageCircle } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import { BUSINESS, waLink } from "@/lib/business";
 import ThemeToggle from "@/components/ThemeToggle";
 
@@ -41,8 +42,14 @@ export default function Navbar() {
           className="flex items-center gap-2.5"
           onClick={() => setOpen(false)}
         >
-          <span className="grid h-10 w-10 place-items-center rounded-xl bg-gradient-to-br from-brand to-brand-deep text-white shadow-lg shadow-violet-500/30">
-            <ShoppingBag className="h-5 w-5" />
+          <span className="grid h-10 w-10 place-items-center overflow-hidden rounded-xl shadow-lg shadow-violet-500/20">
+            <Image
+              src="/images/logo.png"
+              alt="Zero Point Buy Sell Exchange logo"
+              width={40}
+              height={40}
+              className="h-10 w-10 object-cover"
+            />
           </span>
           <span className="leading-tight">
             <span className="block text-base font-bold tracking-tight">
