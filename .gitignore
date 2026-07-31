@@ -25,3 +25,6 @@ schema.json
 
 # typescript
 *.tsbuildinfo
+
+# migration script (contains local tooling only)
+/scripts/
